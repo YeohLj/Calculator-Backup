@@ -82,28 +82,39 @@ public class DevelopmentActivity extends AppCompatActivity {
 
             //Check for which operator is currently using, calculate
             //using the operator amd display the final value to the user
-            if (currentOperator.equals("ADDITION")) {
+            switch (currentOperator) {
 
-                addition();
+                case "ADDITION":
 
-            } else if (currentOperator.equals("SUBTRACTION")) {
+                    addition();
 
-                subtraction();
+                    break;
 
-            } else if (currentOperator.equals("MULTIPLICATION")) {
+                case "SUBTRACTION":
 
-                multiplication();
+                    subtraction();
 
-            } else if (currentOperator.equals("DIVISION")) {
+                    break;
 
-                division();
+                case "MULTIPLICATION":
 
-            } else if (currentOperator.equals("MODULUS")) {
+                    multiplication();
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    modulus();
-                }
+                    break;
 
+                case "DIVISION":
+
+                    division();
+
+                    break;
+
+                case "MODULUS":
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        modulus();
+                    }
+
+                    break;
             }
 
             firstValue = "";
