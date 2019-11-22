@@ -6,13 +6,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import static java.lang.StrictMath.PI;
-import static java.lang.StrictMath.floor;
 import static java.lang.StrictMath.floorDiv;
 import static java.lang.StrictMath.sqrt;
 
@@ -59,48 +56,71 @@ public class DevelopmentActivity extends AppCompatActivity {
 
     public void equals(View view) {
 
-        performTheSelectedSymbol();
+        if (!firstTime || !firstVal) {
 
-        //Check for which operator is currently using, calculate
-        //using the operator amd display the final value to the user
-        if (currentOperator.equals("ADDITION")) {
-
-            addition();
-
-        } else if (currentOperator.equals("SUBTRACTION")) {
-
-            subtraction();
-
-        } else if (currentOperator.equals("MULTIPLICATION")) {
-
-            multiplication();
-
-        } else if (currentOperator.equals("DIVISION")) {
-
-            division();
-
-        } else if (currentOperator.equals("MODULUS")) {
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                modulus();
-            }
+            performTheSelectedSymbol();
 
         }
 
-        firstValue = "";
-        secondValue = "";
-        firstTime = false;
+        if (firstTime && firstVal) {
 
-        //If the final value can be put into an integer than change it
-        //For example: 5.0 or else use double
-        if (finalValue - (int) finalValue == 0) {
+            performTheSelectedSymbol();
 
-            mainTextView.setText((int) finalValue + "");
+            //If the first value can be put into an integer than change it
+            //For example: 5.0 or else use double
+            if (Double.parseDouble(firstValue) - (int) Double.parseDouble(firstValue) == 0) {
+
+                mainTextView.setText((int) Double.parseDouble(firstValue) + "");
+
+            } else {
+
+                mainTextView.setText(firstValue);
+
+            }
 
         } else {
 
-            mainTextView.setText(finalValue + "");
+            //Check for which operator is currently using, calculate
+            //using the operator amd display the final value to the user
+            if (currentOperator.equals("ADDITION")) {
 
+                addition();
+
+            } else if (currentOperator.equals("SUBTRACTION")) {
+
+                subtraction();
+
+            } else if (currentOperator.equals("MULTIPLICATION")) {
+
+                multiplication();
+
+            } else if (currentOperator.equals("DIVISION")) {
+
+                division();
+
+            } else if (currentOperator.equals("MODULUS")) {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    modulus();
+                }
+
+            }
+
+            firstValue = "";
+            secondValue = "";
+            firstTime = false;
+
+            //If the final value can be put into an integer than change it
+            //For example: 5.0 or else use double
+            if (finalValue - (int) finalValue == 0) {
+
+                mainTextView.setText((int) finalValue + "");
+
+            } else {
+
+                mainTextView.setText(finalValue + "");
+
+            }
         }
     }
 
@@ -238,8 +258,6 @@ public class DevelopmentActivity extends AppCompatActivity {
 
         if (TAG == 11 || TAG == 12 || TAG == 13 || TAG == 14) {
 
-            performTheSelectedSymbol();
-
             //Addition
             if (TAG == 11) {
 
@@ -250,6 +268,7 @@ public class DevelopmentActivity extends AppCompatActivity {
                         //If firstValue is not equals to blank
                         if (!firstValue.equals("")) {
 
+                            performTheSelectedSymbol();
                             firstVal = false;
 
                         }
@@ -258,6 +277,7 @@ public class DevelopmentActivity extends AppCompatActivity {
 
                         if (!secondValue.equals("")) {
 
+                            performTheSelectedSymbol();
                             checkForLastOperator();
 
                             addition();
@@ -275,12 +295,14 @@ public class DevelopmentActivity extends AppCompatActivity {
 
                     if (firstVal) {
 
+                        performTheSelectedSymbol();
                         secondValue = "";
                         addition();
                         firstVal = false;
 
                     } else {
 
+                        performTheSelectedSymbol();
                         firstValue = "";
                         addition();
                         firstVal = true;
@@ -303,6 +325,7 @@ public class DevelopmentActivity extends AppCompatActivity {
 
                         if (!firstValue.equals("")) {
 
+                            performTheSelectedSymbol();
                             firstVal = false;
 
                         }
@@ -311,6 +334,7 @@ public class DevelopmentActivity extends AppCompatActivity {
 
                         if (!secondValue.equals("")) {
 
+                            performTheSelectedSymbol();
                             checkForLastOperator();
 
                             subtraction();
@@ -328,12 +352,14 @@ public class DevelopmentActivity extends AppCompatActivity {
 
                     if (firstVal) {
 
+                        performTheSelectedSymbol();
                         secondValue = "";
                         subtraction();
                         firstVal = false;
 
                     } else {
 
+                        performTheSelectedSymbol();
                         firstValue = "";
                         subtraction();
                         firstVal = true;
@@ -354,6 +380,7 @@ public class DevelopmentActivity extends AppCompatActivity {
 
                         if (!firstValue.equals("")) {
 
+                            performTheSelectedSymbol();
                             firstVal = false;
 
                         }
@@ -362,6 +389,7 @@ public class DevelopmentActivity extends AppCompatActivity {
 
                         if (!secondValue.equals("")) {
 
+                            performTheSelectedSymbol();
                             checkForLastOperator();
 
                             multiplication();
@@ -379,12 +407,14 @@ public class DevelopmentActivity extends AppCompatActivity {
 
                     if (firstVal) {
 
+                        performTheSelectedSymbol();
                         secondValue = "";
                         multiplication();
                         firstVal = false;
 
                     } else {
 
+                        performTheSelectedSymbol();
                         firstValue = "";
                         multiplication();
                         firstVal = true;
@@ -405,6 +435,7 @@ public class DevelopmentActivity extends AppCompatActivity {
 
                         if (!firstValue.equals("")) {
 
+                            performTheSelectedSymbol();
                             firstVal = false;
 
                         }
@@ -413,6 +444,7 @@ public class DevelopmentActivity extends AppCompatActivity {
 
                         if (!secondValue.equals("")) {
 
+                            performTheSelectedSymbol();
                             checkForLastOperator();
 
                             division();
@@ -430,12 +462,14 @@ public class DevelopmentActivity extends AppCompatActivity {
 
                     if (firstVal) {
 
+                        performTheSelectedSymbol();
                         secondValue = "";
                         division();
                         firstVal = false;
 
                     } else {
 
+                        performTheSelectedSymbol();
                         firstValue = "";
                         division();
                         firstVal = true;
@@ -458,6 +492,7 @@ public class DevelopmentActivity extends AppCompatActivity {
 
                         if (!firstValue.equals("")) {
 
+                            performTheSelectedSymbol();
                             firstVal = false;
 
                         }
@@ -466,6 +501,7 @@ public class DevelopmentActivity extends AppCompatActivity {
 
                         if (!secondValue.equals("")) {
 
+                            performTheSelectedSymbol();
                             checkForLastOperator();
 
                             modulus();
@@ -483,12 +519,14 @@ public class DevelopmentActivity extends AppCompatActivity {
 
                     if (firstVal) {
 
+                        performTheSelectedSymbol();
                         secondValue = "";
                         modulus();
                         firstVal = false;
 
                     } else {
 
+                        performTheSelectedSymbol();
                         firstValue = "";
                         modulus();
                         firstVal = true;
@@ -530,6 +568,7 @@ public class DevelopmentActivity extends AppCompatActivity {
 
                 firstValue = String.valueOf(sqrt(Double.parseDouble(firstValue.substring(1))));
 
+                Log.i("Square root firstvalue", firstValue);
             }
 
         } else {
@@ -538,6 +577,7 @@ public class DevelopmentActivity extends AppCompatActivity {
 
                 secondValue = String.valueOf(sqrt(Double.parseDouble(secondValue.substring(1))));
 
+                Log.i("Square root secondvalue", secondValue);
             }
 
         }
