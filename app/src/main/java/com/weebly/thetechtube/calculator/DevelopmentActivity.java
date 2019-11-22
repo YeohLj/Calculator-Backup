@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import static java.lang.StrictMath.PI;
 import static java.lang.StrictMath.floor;
 import static java.lang.StrictMath.floorDiv;
 import static java.lang.StrictMath.sqrt;
@@ -57,6 +58,8 @@ public class DevelopmentActivity extends AppCompatActivity {
     }
 
     public void equals(View view) {
+
+        performTheSelectedSymbol();
 
         //Check for which operator is currently using, calculate
         //using the operator amd display the final value to the user
@@ -233,211 +236,216 @@ public class DevelopmentActivity extends AppCompatActivity {
 
         }
 
-        //Addition
-        if (TAG == 11) {
+        if (TAG == 11 || TAG == 12 || TAG == 13 || TAG == 14) {
 
-            if (firstTime) {
+            performTheSelectedSymbol();
 
-                if (firstVal) {
+            //Addition
+            if (TAG == 11) {
 
-                    //If firstValue is not equals to blank
-                    if (!firstValue.equals("")) {
+                if (firstTime) {
 
-                        firstVal = false;
+                    if (firstVal) {
 
+                        //If firstValue is not equals to blank
+                        if (!firstValue.equals("")) {
+
+                            firstVal = false;
+
+                        }
+
+                    } else {
+
+                        if (!secondValue.equals("")) {
+
+                            checkForLastOperator();
+
+                            addition();
+                            firstTime = false;
+                            firstValue = "";
+                            secondValue = "";
+                            firstVal = true;
+
+                        }
                     }
 
                 } else {
 
-                    if (!secondValue.equals("")) {
+                    checkForLastOperator();
 
-                        checkForLastOperator();
+                    if (firstVal) {
 
+                        secondValue = "";
                         addition();
-                        firstTime = false;
+                        firstVal = false;
+
+                    } else {
+
                         firstValue = "";
-                        secondValue = "";
+                        addition();
                         firstVal = true;
 
                     }
                 }
 
-            } else {
+                //The addition button will be tapped so the currentOperator
+                //will be ADDITION
+                currentOperator = "ADDITION";
 
-                checkForLastOperator();
-
-                if (firstVal) {
-
-                    secondValue = "";
-                    addition();
-                    firstVal = false;
-
-                } else {
-
-                    firstValue = "";
-                    addition();
-                    firstVal = true;
-
-                }
             }
 
-            //The addition button will be tapped so the currentOperator
-            //will be ADDITION
-            currentOperator = "ADDITION";
+            //Subtraction
+            if (TAG == 12) {
 
-        }
+                if (firstTime) {
 
-        //Subtraction
-        if (TAG == 12) {
+                    if (firstVal) {
 
-            if (firstTime) {
+                        if (!firstValue.equals("")) {
 
-                if (firstVal) {
+                            firstVal = false;
 
-                    if (!firstValue.equals("")) {
+                        }
 
-                        firstVal = false;
+                    } else {
 
+                        if (!secondValue.equals("")) {
+
+                            checkForLastOperator();
+
+                            subtraction();
+                            firstTime = false;
+                            firstValue = "";
+                            secondValue = "";
+                            firstVal = true;
+
+                        }
                     }
 
                 } else {
 
-                    if (!secondValue.equals("")) {
+                    checkForLastOperator();
 
-                        checkForLastOperator();
+                    if (firstVal) {
 
+                        secondValue = "";
                         subtraction();
-                        firstTime = false;
+                        firstVal = false;
+
+                    } else {
+
                         firstValue = "";
-                        secondValue = "";
+                        subtraction();
                         firstVal = true;
 
                     }
                 }
 
-            } else {
+                currentOperator = "SUBTRACTION";
 
-                checkForLastOperator();
-
-                if (firstVal) {
-
-                    secondValue = "";
-                    subtraction();
-                    firstVal = false;
-
-                } else {
-
-                    firstValue = "";
-                    subtraction();
-                    firstVal = true;
-
-                }
             }
 
-            currentOperator = "SUBTRACTION";
+            //Multiplication
+            if (TAG == 13) {
 
-        }
+                if (firstTime) {
 
-        //Multiplication
-        if (TAG == 13) {
+                    if (firstVal) {
 
-            if (firstTime) {
+                        if (!firstValue.equals("")) {
 
-                if (firstVal) {
+                            firstVal = false;
 
-                    if (!firstValue.equals("")) {
+                        }
 
-                        firstVal = false;
+                    } else {
 
+                        if (!secondValue.equals("")) {
+
+                            checkForLastOperator();
+
+                            multiplication();
+                            firstTime = false;
+                            firstValue = "";
+                            secondValue = "";
+                            firstVal = true;
+
+                        }
                     }
 
                 } else {
 
-                    if (!secondValue.equals("")) {
+                    checkForLastOperator();
 
-                        checkForLastOperator();
+                    if (firstVal) {
 
+                        secondValue = "";
                         multiplication();
-                        firstTime = false;
-                        firstValue = "";
-                        secondValue = "";
-                        firstVal = true;
-
-                    }
-                }
-
-            } else {
-
-                checkForLastOperator();
-
-                if (firstVal) {
-
-                    secondValue = "";
-                    multiplication();
-                    firstVal = false;
-
-                } else {
-
-                    firstValue = "";
-                    multiplication();
-                    firstVal = true;
-
-                }
-            }
-
-            currentOperator = "MULTIPLICATION";
-
-        }
-
-        //Division
-        if (TAG == 14) {
-
-            if (firstTime) {
-
-                if (firstVal) {
-
-                    if (!firstValue.equals("")) {
-
                         firstVal = false;
 
-                    }
+                    } else {
 
-                } else {
-
-                    if (!secondValue.equals("")) {
-
-                        checkForLastOperator();
-
-                        division();
-                        firstTime = false;
                         firstValue = "";
-                        secondValue = "";
+                        multiplication();
                         firstVal = true;
 
                     }
                 }
 
-            } else {
+                currentOperator = "MULTIPLICATION";
 
-                checkForLastOperator();
+            }
 
-                if (firstVal) {
+            //Division
+            if (TAG == 14) {
 
-                    secondValue = "";
-                    division();
-                    firstVal = false;
+                if (firstTime) {
+
+                    if (firstVal) {
+
+                        if (!firstValue.equals("")) {
+
+                            firstVal = false;
+
+                        }
+
+                    } else {
+
+                        if (!secondValue.equals("")) {
+
+                            checkForLastOperator();
+
+                            division();
+                            firstTime = false;
+                            firstValue = "";
+                            secondValue = "";
+                            firstVal = true;
+
+                        }
+                    }
 
                 } else {
 
-                    firstValue = "";
-                    division();
-                    firstVal = true;
+                    checkForLastOperator();
 
+                    if (firstVal) {
+
+                        secondValue = "";
+                        division();
+                        firstVal = false;
+
+                    } else {
+
+                        firstValue = "";
+                        division();
+                        firstVal = true;
+
+                    }
                 }
+
+                currentOperator = "DIVISION";
+
             }
-
-            currentOperator = "DIVISION";
-
         }
 
         //Modulus
@@ -510,10 +518,29 @@ public class DevelopmentActivity extends AppCompatActivity {
 
             }
 
-            Log.i("Square root of 8", String.valueOf(sqrt(8)));
-
         }
 
+    }
+
+    public void performTheSelectedSymbol() {
+
+        if (firstVal) {
+
+            if (firstValue.startsWith("√")) {
+
+                firstValue = String.valueOf(sqrt(Double.parseDouble(firstValue.substring(1))));
+
+            }
+
+        } else {
+
+            if (secondValue.startsWith("√")) {
+
+                secondValue = String.valueOf(sqrt(Double.parseDouble(secondValue.substring(1))));
+
+            }
+
+        }
     }
 
     public void addition() {
@@ -759,9 +786,14 @@ public class DevelopmentActivity extends AppCompatActivity {
             modulus();
             Log.i("Info modulus", String.valueOf(finalValue));
 
+        } else if (currentOperator.equals("SQUARE ROOT")) {
+
+
+
         }
 
     }
+
 
     //BONUS SECTION
 
